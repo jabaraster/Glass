@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 wicket-jpaプロジェクトの動作のさせ方
 
 # 事前準備
@@ -48,3 +49,7 @@ mvn -DskipTests=true compile exec:java
 次のURLにアクセスすると、Webアプリが使えます.  
 
 <http://localhost:8081>
+=======
+Glass
+=====
+>>>>>>> FETCH_HEAD
