@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Glassが見た車番を登録</title>
+  <style>
+    li > label {
+      display: inline-block;
+      text-align: right;
+      width: 110px;
+    }
+    li {
+      list-style: none;
+    }
+  </style>
+</head>
+<body>
+  <form method="post" action="/rest/staff/look">
+    <ul>
+      <li>
+        <label>スタッフ名</label>
+        <input type="text" name="staffName" />
+      </li>
+      <li>
+        <label>SS識別子</label>
+        <input type="text" name="ssDescriptor" />
+      </li>
+      <li>
+        <fieldset>
+        <legend>車番</legend>
+        <ul>
+          <li>
+            <label>陸運局</label>
+            <input type="text" name="carDepartment" />
+          </li>
+          <li>
+            <label>種別</label>
+            <input type="text" name="carClass" />
+          </li>
+          <li>
+            <label>事業種別</label>
+            <input type="text" name="carCategory" />
+          </li>
+          <li>
+            <label>一連指定番号</label>
+            <input type="text" name="carNumber" />
+          </li>
+        </ul>
+        </fieldset>
+      </li>
+      <li>
+        <input type="submit" value="送信" />
+      </li>
+    </ul>
+
+  </form>
+</body>
+</html>

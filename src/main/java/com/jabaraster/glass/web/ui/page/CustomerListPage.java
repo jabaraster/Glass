@@ -128,15 +128,15 @@ public class CustomerListPage extends WebPageBase {
 
         @Override
         public Iterator<? extends ECustomer> iterator(final long pFirst, final long pCount) {
-            final SortParam<String> so = getSort();
-            final Sort sort = so.isAscending() ? Sort.asc(so.getProperty()) : Sort.desc(so.getProperty());
-
             if (pFirst > Integer.MAX_VALUE) {
                 throw new IllegalStateException();
             }
             if (pCount > Integer.MAX_VALUE) {
                 throw new IllegalStateException();
             }
+
+            final SortParam<String> so = getSort();
+            final Sort sort = so.isAscending() ? Sort.asc(so.getProperty()) : Sort.desc(so.getProperty());
             return CustomerListPage.this.customerService.get(sort, (int) pFirst, (int) pCount).iterator();
         }
 

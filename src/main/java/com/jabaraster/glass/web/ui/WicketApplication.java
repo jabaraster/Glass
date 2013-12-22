@@ -18,6 +18,7 @@ import com.google.inject.Injector;
 import com.jabaraster.glass.web.ui.page.CustomerListPage;
 import com.jabaraster.glass.web.ui.page.DeleteCustomerPage;
 import com.jabaraster.glass.web.ui.page.NewCustomerPage;
+import com.jabaraster.glass.web.ui.page.StaffLookedCustomerListPage;
 import com.jabaraster.glass.web.ui.page.TopPage;
 import com.jabaraster.glass.web.ui.page.UpdateCustomerPage;
 
@@ -97,6 +98,7 @@ public class WicketApplication extends WebApplication {
         this.mountPage("customer/new", NewCustomerPage.class);
         this.mountPage("customer/edit", UpdateCustomerPage.class);
         this.mountPage("customer/delete", DeleteCustomerPage.class);
+        this.mountPage("staff/look", StaffLookedCustomerListPage.class);
     }
 
     private void mountResource(final Resource pResource, final String pFilePath, final Duration pCacheDuration) {
