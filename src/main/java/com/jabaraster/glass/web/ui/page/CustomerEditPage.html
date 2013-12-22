@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <title></title>
+  <meta charset="UTF-8" />
+</head>
+<body>
+
+<wicket:extend>
+  <a href="#" wicket:id="goIndex" class="btn btn-primary">
+    リストに戻る
+  </a>
+  <hr/>
+  <div wicket:id="feedback"></div>
+  <form wicket:id="form">
+    <ul>
+      <li>
+        <label>お客様氏名</label>
+        <input type="text" wicket:id="name" />
+      </li>
+      <li>
+        <label>車番</label>
+        <ul class="carNumberContainer">
+          <li>
+            <label>陸運局</label>
+            <input type="text" wicket:id="department" />
+          </li>
+          <li>
+            <label>種別</label>
+            <input type="text" wicket:id="classification" />
+          </li>
+          <li>
+            <label>事業種別</label>
+            <input type="text" wicket:id="category" />
+          </li>
+          <li>
+            <label>一連指定番号</label>
+            <input type="text" wicket:id="number" />
+          </li>
+        </ul>
+      </li>
+      <li>
+        <button wicket:id="submitter" class="btn btn-lg btn-success">
+          <i class="glyphicon glyphicon-white glyphicon-ok"></i>
+          保存
+        </button>
+      </li>
+    </ul>
+  </form>
+</wicket:extend>
+
+</body>
+</html>
