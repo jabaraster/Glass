@@ -26,7 +26,7 @@
 
     </persistence-unit>
 
-    <persistence-unit name="Glass_WithDataSource" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="Glass" transaction-type="RESOURCE_LOCAL">
 
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <class>jabara.jpa.entity.EntityBase</class>
