@@ -9,7 +9,11 @@
 <wicket:extend>
   <div wicket:id="goTop" />
   <hr/>
-  <p>ここはテスト用ページです。スタッフが見た車番を登録して下さい。</p>
+  <h1>車番によるお客様来店情報登録</h1>
+  <p>ここは、統合DBアクセスサーバが持つRESTインターフェイス <span class="emphasis">車番によるお客様来店情報登録</span>
+  をテストするためのページです。<br/>
+  本来はプログラムからアクセスするインターフェイスを手動でテスト可能にするために、HTMLフォームを提供しています。
+  </p>
   <form method="post" action="/rest/staff/look">
     <ul>
       <li>
