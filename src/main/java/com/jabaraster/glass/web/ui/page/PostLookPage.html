@@ -1,20 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
+  <title></title>
   <meta charset="UTF-8" />
-  <title>スタッフが見た車番を登録</title>
-  <style>
-    li > label {
-      display: inline-block;
-      text-align: right;
-      width: 110px;
-    }
-    li {
-      list-style: none;
-    }
-  </style>
 </head>
 <body>
+
+<wicket:extend>
+  <div wicket:id="goTop" />
+  <hr/>
+  <p>ここはテスト用ページです。スタッフが見た車番を登録して下さい。</p>
   <form method="post" action="/rest/staff/look">
     <ul>
       <li>
@@ -25,8 +20,8 @@
         <label>SS識別子</label>
         <input type="text" name="ssDescriptor" />
       </li>
-      <li>
-        <fieldset>
+    </ul>
+      <fieldset>
         <legend>車番</legend>
         <ul>
           <li>
@@ -46,13 +41,15 @@
             <input type="text" name="carNumber" />
           </li>
         </ul>
-        </fieldset>
-      </li>
-      <li>
-        <input type="submit" value="送信" />
-      </li>
-    </ul>
-
+      </fieldset>
+      <hr/>
+      <button class="btn btn-lg btn-success">
+        <i class="glyphicon glyphicon-white glyphicon-ok"></i>
+        送信
+      </button>
+      <span class="emphasis">送信に成功したら画面が真っ白になります。</span>
   </form>
+</wicket:extend>
+
 </body>
 </html>

@@ -16,7 +16,7 @@ import org.apache.wicket.model.IModel;
 public class NewCustomerPage extends CustomerEditPage {
     private static final long serialVersionUID = 1685254724844783758L;
 
-    private final Handler     handler          = new Handler();
+    private final Handler     handler          = new Handler(this);
 
     /**
      * 
@@ -41,13 +41,19 @@ public class NewCustomerPage extends CustomerEditPage {
         this.handler.onSutmit();
     }
 
-    private class Handler implements Serializable {
-        private static final long serialVersionUID = -5583390248974372359L;
+    private static class Handler implements Serializable {
+        private static final long     serialVersionUID = -5583390248974372359L;
+
+        private final NewCustomerPage page;
+
+        Handler(final NewCustomerPage pPage) {
+            this.page = pPage;
+        }
 
         void onSutmit() {
-            NewCustomerPage.this.customer.setCarNumber(NewCustomerPage.this.carNumber);
-            NewCustomerPage.this.customerService.insert(NewCustomerPage.this.customer);
-            setResponsePage(CustomerListPage.class);
+            this.page.customer.setCarNumber(this.page.carNumber);
+            this.page.customerService.insert(this.page.customer);
+            this.page.setResponsePage(CustomerListPage.class);
         }
     }
 }

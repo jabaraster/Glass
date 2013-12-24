@@ -4,7 +4,7 @@
 package com.jabaraster.glass.web.ui.page;
 
 import jabara.general.NotFound;
-import jabara.wicket.CssUtil;
+import jabara.wicket.ComponentCssHeaderItem;
 
 import javax.inject.Inject;
 
@@ -90,7 +90,7 @@ public abstract class CustomerEditPage extends WebPageBase {
     @Override
     public void renderHead(final IHeaderResponse pResponse) {
         super.renderHead(pResponse);
-        CssUtil.addComponentCssReference(pResponse, CustomerEditPage.class);
+        pResponse.render(ComponentCssHeaderItem.forType(CustomerEditPage.class));
     }
 
     /**

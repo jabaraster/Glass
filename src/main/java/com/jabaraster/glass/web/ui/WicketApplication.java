@@ -17,7 +17,9 @@ import org.apache.wicket.util.time.Duration;
 import com.google.inject.Injector;
 import com.jabaraster.glass.web.ui.page.CustomerListPage;
 import com.jabaraster.glass.web.ui.page.DeleteCustomerPage;
+import com.jabaraster.glass.web.ui.page.DeleteStaffLookedCustomerPage;
 import com.jabaraster.glass.web.ui.page.NewCustomerPage;
+import com.jabaraster.glass.web.ui.page.PostLookPage;
 import com.jabaraster.glass.web.ui.page.StaffLookedCustomerListPage;
 import com.jabaraster.glass.web.ui.page.TopPage;
 import com.jabaraster.glass.web.ui.page.UpdateCustomerPage;
@@ -99,6 +101,8 @@ public class WicketApplication extends WebApplication {
         this.mountPage("customer/edit", UpdateCustomerPage.class);
         this.mountPage("customer/delete", DeleteCustomerPage.class);
         this.mountPage("staff/look", StaffLookedCustomerListPage.class);
+        this.mountPage("staff/look/post", PostLookPage.class);
+        this.mountPage("staff/look/delete", DeleteStaffLookedCustomerPage.class);
     }
 
     private void mountResource(final Resource pResource, final String pFilePath, final Duration pCacheDuration) {
@@ -117,6 +121,7 @@ public class WicketApplication extends WebApplication {
 
     @SuppressWarnings({ "nls" })
     private void mountResources() {
+        mountResource(Resource.BACK, "brickwall.png", Duration.days(10));
         mountResource(Resource.FAVICON, "favicon.png", Duration.days(10));
     }
 
@@ -131,6 +136,10 @@ public class WicketApplication extends WebApplication {
      * @author jabaraster
      */
     public enum Resource {
+        /**
+         * 
+         */
+        BACK("back"), //$NON-NLS-1$
 
         /**
          * 

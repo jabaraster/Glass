@@ -37,6 +37,7 @@ import com.jabaraster.glass.web.ui.component.AttributeColumn;
 import com.jabaraster.glass.web.ui.component.DateTimeColumn;
 import com.jabaraster.glass.web.ui.component.DeleteLinkColumn;
 import com.jabaraster.glass.web.ui.component.EditLinkColumn;
+import com.jabaraster.glass.web.ui.component.GoTopLink;
 
 /**
  * @author jabaraster
@@ -47,6 +48,7 @@ public class CustomerListPage extends WebPageBase {
     @Inject
     private ICustomerService                                customerService;
 
+    private GoTopLink                                       goTopLink;
     private Link<?>                                         adder;
     private AjaxFallbackDefaultDataTable<ECustomer, String> customers;
 
@@ -54,6 +56,7 @@ public class CustomerListPage extends WebPageBase {
      * 
      */
     public CustomerListPage() {
+        this.add(getGoTopLink());
         this.add(getAdder());
         this.add(getCustomers());
     }
@@ -101,6 +104,13 @@ public class CustomerListPage extends WebPageBase {
                     , 20);
         }
         return this.customers;
+    }
+
+    private GoTopLink getGoTopLink() {
+        if (this.goTopLink == null) {
+            this.goTopLink = new GoTopLink("goTop"); //$NON-NLS-1$
+        }
+        return this.goTopLink;
     }
 
     private static class CarNumberColumn extends AbstractColumn<ECustomer, String> {

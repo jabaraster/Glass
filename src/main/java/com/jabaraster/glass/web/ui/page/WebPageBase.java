@@ -18,6 +18,7 @@ import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import com.jabaraster.glass.Environment;
 import com.jabaraster.glass.web.ui.WicketApplication;
 import com.jabaraster.glass.web.ui.WicketApplication.Resource;
+import com.jabaraster.glass.web.ui.component.BodyCssHeaderItem;
 
 /**
  *
@@ -86,6 +87,7 @@ public abstract class WebPageBase extends WebPage {
 
         pResponse.render(CssHeaderItem.forReference(REF_BOOTSTRAP_CSS));
         pResponse.render(CssHeaderItem.forReference(REF_APP_CSS));
+        pResponse.render(BodyCssHeaderItem.get());
 
         pResponse.render(JavaScriptHeaderItem.forReference(JavaScriptUtil.JQUERY_1_9_1_REFERENCE));
         pResponse.render(JavaScriptHeaderItem.forReference(REF_BOOTSTRAP_JS));

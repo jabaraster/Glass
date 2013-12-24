@@ -8,6 +8,7 @@ import jabara.general.NotFound;
 import java.util.List;
 
 import com.google.inject.ImplementedBy;
+import com.jabaraster.glass.entity.EStaffLookedCustomer;
 import com.jabaraster.glass.model.CarNumber;
 import com.jabaraster.glass.model.StaffLookedCustomer;
 import com.jabaraster.glass.service.impl.StaffLookedCustomerServiceImpl;
@@ -17,6 +18,19 @@ import com.jabaraster.glass.service.impl.StaffLookedCustomerServiceImpl;
  */
 @ImplementedBy(StaffLookedCustomerServiceImpl.class)
 public interface IStaffLookedCustomerService {
+
+    /**
+     * @param pId -
+     */
+    void delete(long pId);
+
+    /**
+     * @param pSsDescriptor -
+     * @param pStaffName -
+     * @return -
+     * @throws NotFound -
+     */
+    EStaffLookedCustomer findByCondition(String pSsDescriptor, String pStaffName) throws NotFound;
 
     /**
      * @param pRequestSs null禁止.

@@ -44,6 +44,23 @@ public class StaffLookedCustomerServiceImpl extends JpaDaoBase implements IStaff
     }
 
     /**
+     * @see com.jabaraster.glass.service.IStaffLookedCustomerService#delete(long)
+     */
+    @Override
+    public void delete(final long pId) {
+        final EntityManager em = getEntityManager();
+        em.remove(em.find(EStaffLookedCustomer.class, Long.valueOf(pId)));
+    }
+
+    /**
+     * @see com.jabaraster.glass.service.IStaffLookedCustomerService#findByCondition(java.lang.String, java.lang.String)
+     */
+    @Override
+    public EStaffLookedCustomer findByCondition(final String pSsDescriptor, final String pStaffName) throws NotFound {
+        return findByConditionCore(pSsDescriptor, pStaffName);
+    }
+
+    /**
      * @see com.jabaraster.glass.service.IStaffLookedCustomerService#getLookedCustomers(java.lang.String, java.lang.String)
      */
     @Override
@@ -53,8 +70,7 @@ public class StaffLookedCustomerServiceImpl extends JpaDaoBase implements IStaff
     }
 
     /**
-     * @see com.jabaraster.glass.service.IStaffLookedCustomerService#setStaffLookedCustomer(java.lang.String, java.lang.String,
-     *      CarNumber)
+     * @see com.jabaraster.glass.service.IStaffLookedCustomerService#setStaffLookedCustomer(java.lang.String, java.lang.String, CarNumber)
      */
     @Override
     public void setStaffLookedCustomer(final String pStaffName, final String pSsDescriptor, final CarNumber pCarNumber) throws NotFound {
@@ -64,35 +80,14 @@ public class StaffLookedCustomerServiceImpl extends JpaDaoBase implements IStaff
 
         final ECustomer customer = this.customerService.findByCarNumber(pCarNumber);
         try {
-            final EStaffLookedCustomer s = findByCondition(pStaffName, pSsDescriptor);
+            final EStaffLookedCustomer s = findByConditionCore(pSsDescriptor, pStaffName);
             s.setLooked(customer); // この操作がUPDATEに相当する.
         } catch (final NotFound e) {
             insert(pStaffName, pSsDescriptor, customer);
         }
     }
 
-    // @SuppressWarnings("nls")
-    // boolean exists(final String pStaffName, final String pSsDescriptor) {
-    // final EntityManager em = getEntityManager();
-    // final CriteriaBuilder builder = em.getCriteriaBuilder();
-    // final CriteriaQuery<String> query = builder.createQuery(String.class);
-    // query.from(EStaffLookedCustomer.class);
-    //
-    // final Subquery<String> subquery = query.subquery(String.class);
-    // subquery.select(builder.literal("X"));
-    // final Root<EStaffLookedCustomer> subFrom = subquery.from(EStaffLookedCustomer.class);
-    // subquery.where( //
-    // builder.equal(subFrom.get(EStaffLookedCustomer_.staffName), pStaffName) //
-    // , builder.equal(subFrom.get(EStaffLookedCustomer_.ssDescriptor), pSsDescriptor) //
-    // );
-    //
-    // query.select(builder.literal("X"));
-    // query.where(builder.exists(subquery));
-    //
-    // return !em.createQuery(query).getResultList().isEmpty();
-    // }
-
-    EStaffLookedCustomer findByCondition(final String pStaffName, final String pSsDescriptor) throws NotFound {
+    EStaffLookedCustomer findByConditionCore(final String pSsDescriptor, final String pStaffName) throws NotFound {
         final EntityManager em = getEntityManager();
         final CriteriaBuilder builder = em.getCriteriaBuilder();
         final CriteriaQuery<EStaffLookedCustomer> query = builder.createQuery(EStaffLookedCustomer.class);

@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+  <title></title>
+  <meta charset="UTF-8" />
+</head>
+<body>
+
+<wicket:extend>
+  <a href="#" wicket:id="goIndex" class="btn btn-primary">
+    リストに戻る
+  </a>
+  <hr/>
+  <h1>'<span wicket:id="staffName"></span>'が見たお客様情報を削除しますか？</h1>
+  <form wicket:id="form">
+    <button wicket:id="submitter" class="btn btn-lg btn-danger">
+      <i class="glyphicon glyphicon-white glyphicon-ok"></i>
+      削除を実行
+    </button>
+  </form>
+</wicket:extend>
+
+</body>
+</html>

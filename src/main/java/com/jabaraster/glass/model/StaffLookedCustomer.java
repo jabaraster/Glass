@@ -7,6 +7,8 @@ import jabara.general.ArgUtil;
 
 import java.io.Serializable;
 
+import net.arnx.jsonic.JSONHint;
+
 import com.jabaraster.glass.entity.ECarNumber;
 import com.jabaraster.glass.entity.ECustomer;
 import com.jabaraster.glass.entity.EStaffLookedCustomer;
@@ -38,6 +40,14 @@ public class StaffLookedCustomer implements Serializable {
      */
     public ECustomer getCustomer() {
         return this.customer.getLooked();
+    }
+
+    /**
+     * @return -
+     */
+    @JSONHint(ignore = true)
+    public String getSsDescriptor() {
+        return this.customer.getSsDescriptor();
     }
 
     /**

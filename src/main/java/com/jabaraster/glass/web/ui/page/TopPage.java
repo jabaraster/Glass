@@ -17,6 +17,7 @@ public class TopPage extends WebPageBase {
     public TopPage() {
         add(new BookmarkablePageLink<>("goCustomerList", CustomerListPage.class)); //$NON-NLS-1$
         add(new BookmarkablePageLink<>("goStaffLooked", StaffLookedCustomerListPage.class)); //$NON-NLS-1$
+        add(new BookmarkablePageLink<>("goPostLook", PostLookPage.class)); //$NON-NLS-1$
     }
 
     /**

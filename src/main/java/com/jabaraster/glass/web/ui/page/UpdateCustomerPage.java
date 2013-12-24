@@ -17,7 +17,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 public class UpdateCustomerPage extends CustomerEditPage {
     private static final long serialVersionUID = -5105119358597502001L;
 
-    private final Handler     handler          = new Handler();
+    private final Handler     handler          = new Handler(this);
 
     /**
      * @param pParameters
@@ -42,13 +42,19 @@ public class UpdateCustomerPage extends CustomerEditPage {
         this.handler.onSubmit();
     }
 
-    private class Handler implements Serializable {
-        private static final long serialVersionUID = 2224649196186495170L;
+    private static class Handler implements Serializable {
+        private static final long        serialVersionUID = 2224649196186495170L;
+
+        private final UpdateCustomerPage page;
+
+        Handler(final UpdateCustomerPage pPage) {
+            this.page = pPage;
+        }
 
         void onSubmit() {
-            UpdateCustomerPage.this.customer.setCarNumber(UpdateCustomerPage.this.carNumber);
-            UpdateCustomerPage.this.customerService.update(UpdateCustomerPage.this.customer);
-            setResponsePage(CustomerListPage.class);
+            this.page.customer.setCarNumber(this.page.carNumber);
+            this.page.customerService.update(this.page.customer);
+            this.page.setResponsePage(CustomerListPage.class);
         }
     }
 }

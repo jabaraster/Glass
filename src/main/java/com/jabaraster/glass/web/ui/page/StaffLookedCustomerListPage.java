@@ -18,12 +18,14 @@ import org.apache.wicket.extensions.markup.html.repeater.data.table.AbstractColu
 import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
 import org.apache.wicket.extensions.markup.html.repeater.util.SortableDataProvider;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.model.IModel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import com.jabaraster.glass.model.StaffLookedCustomer;
 import com.jabaraster.glass.service.IStaffLookedCustomerService;
+import com.jabaraster.glass.web.ui.component.DeleteLinkColumn;
+import com.jabaraster.glass.web.ui.component.GoTopLink;
 
 /**
  * @author jabaraster
@@ -39,13 +41,14 @@ public class StaffLookedCustomerListPage extends WebPageBase {
     @Inject
     IStaffLookedCustomerService                                       staffLookedCustomerService;
 
+    private GoTopLink                                                 goTopLink;
     private AjaxFallbackDefaultDataTable<StaffLookedCustomer, String> list;
 
     /**
      * 
      */
     public StaffLookedCustomerListPage() {
-        this.add(new BookmarkablePageLink<>("goTop", TopPage.class)); //$NON-NLS-1$
+        this.add(getGoTopLink());
         this.add(getList());
     }
 
@@ -57,11 +60,24 @@ public class StaffLookedCustomerListPage extends WebPageBase {
         return Models.readOnly("スタッフが見たお客様情報一覧"); //$NON-NLS-1$
     }
 
+    private GoTopLink getGoTopLink() {
+        if (this.goTopLink == null) {
+            this.goTopLink = new GoTopLink("goTop"); //$NON-NLS-1$
+        }
+        return this.goTopLink;
+    }
+
     @SuppressWarnings({ "nls", "serial" })
     private AjaxFallbackDefaultDataTable<StaffLookedCustomer, String> getList() {
         if (this.list == null) {
             final List<IColumn<StaffLookedCustomer, String>> columns = new ArrayList<>();
 
+            columns.add(new LabelColumn("SS", new IProducer2<StaffLookedCustomer, String>() {
+                @Override
+                public String produce(final StaffLookedCustomer pArgument) {
+                    return pArgument.getSsDescriptor();
+                }
+            }));
             columns.add(new LabelColumn("スタッフ名", new IProducer2<StaffLookedCustomer, String>() {
                 @Override
                 public String produce(final StaffLookedCustomer pArgument) {
@@ -80,6 +96,14 @@ public class StaffLookedCustomerListPage extends WebPageBase {
                     return pArgument.getCarNumber().getDisplayString();
                 }
             }));
+
+            final IProducer2<StaffLookedCustomer, PageParameters> p = new IProducer2<StaffLookedCustomer, PageParameters>() {
+                @Override
+                public PageParameters produce(final StaffLookedCustomer pArgument) {
+                    return DeleteStaffLookedCustomerPage.createParameters(pArgument.getSsDescriptor(), pArgument.getStaffName());
+                }
+            };
+            columns.add(new DeleteLinkColumn<>(Models.readOnly("削除"), DeleteStaffLookedCustomerPage.class, p)); //$NON-NLS-1$
 
             final Provider provider = new Provider();
             this.list = new AjaxFallbackDefaultDataTable<>("list", columns, provider, 20); //$NON-NLS-1$

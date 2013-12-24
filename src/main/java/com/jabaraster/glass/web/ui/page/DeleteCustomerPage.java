@@ -35,7 +35,7 @@ public class DeleteCustomerPage extends WebPageBase {
 
     private final ECustomer   customer;
 
-    private final Handler     handler          = new Handler();
+    private final Handler     handler          = new Handler(this);
 
     private Link<?>           goIndex;
     private Label             customerName;
@@ -104,12 +104,18 @@ public class DeleteCustomerPage extends WebPageBase {
         return this.submitter;
     }
 
-    private class Handler implements Serializable {
-        private static final long serialVersionUID = 4582890479480727797L;
+    private static class Handler implements Serializable {
+        private static final long        serialVersionUID = 4582890479480727797L;
+
+        private final DeleteCustomerPage page;
+
+        Handler(final DeleteCustomerPage pPage) {
+            this.page = pPage;
+        }
 
         void onSubmit() {
-            DeleteCustomerPage.this.customerService.delete(DeleteCustomerPage.this.customer.getId().longValue());
-            setResponsePage(CustomerListPage.class);
+            this.page.customerService.delete(this.page.customer.getId().longValue());
+            this.page.setResponsePage(CustomerListPage.class);
         }
     }
 
